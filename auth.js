@@ -4,9 +4,10 @@
 // at {{ https://cloud.google.com/console }}.
 // If you run this code from a server other than http://localhost,
 // you need to register your own client ID.
-var OAUTH2_CLIENT_ID ="340921863699-csp6142a8v1fcti86c5g6amv7ge21q43.apps.googleusercontent.com";
+var apiKey= "AIzaSyDDczfcz2PVNMNBwwonpRI7t3WthynNrOk";
+var OAUTH2_CLIENT_ID = "340921863699-csp6142a8v1fcti86c5g6amv7ge21q43.apps.googleusercontent.com";
 var OAUTH2_SCOPES = [
-  'https://www.googleapis.com/auth/youtube'
+  'https://www.googleapis.com/auth/youtube',
 ];
 
 // Upon loading, the Google APIs JS client automatically invokes this callback.
@@ -32,8 +33,11 @@ function checkAuth() {
 
 // Handle the result of a gapi.auth.authorize() call.
 function handleAuthResult(authResult) {
-    console.log(authResult)
-  if (authResult && !authResult.error) {
+    console.log(authResult.error)
+     loadAPIClientInterfaces();
+    
+      if (authResult && !authResult.error) {
+          
     // Authorization was successful. Hide authorization prompts and show
     // content that should be visible after authorization succeeds.
     $('.pre-auth').hide();
@@ -56,6 +60,7 @@ function handleAuthResult(authResult) {
 // are required to use the Google APIs JS client. More info is available at
 // https://developers.google.com/api-client-library/javascript/dev/dev_jscript#loading-the-client-library-and-the-api
 function loadAPIClientInterfaces() {
+gapi.client.setApiKey(apiKey);
   gapi.client.load('youtube', 'v3', function() {
           handleAPILoaded();
   });
